@@ -4,6 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Set Your Budget</title>
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
@@ -186,6 +187,27 @@ body{
     border-radius:12px;
     color:#cbd5f5;
 }
+    /* your existing css */
+
+/* ================= MOBILE RESPONSIVE ================= */
+
+@media (max-width:768px){
+    .navbar{
+        flex-direction:column;
+        gap:15px;
+        padding:20px;
+    }
+
+    .nav-links{
+        flex-wrap:wrap;
+        justify-content:center;
+        gap:10px;
+    }
+
+    .hero h1{
+        font-size:32px;
+    }
+}
 </style>
 </head>
 
@@ -275,3 +297,4 @@ document.querySelectorAll(".nav-btn").forEach(btn => {
 
 </body>
 </html>
+
