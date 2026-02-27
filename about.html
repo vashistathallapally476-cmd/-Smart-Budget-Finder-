@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About SmartBudget</title>
+    <link rel="stylesheet" href="about.css">
+</head>
+<body>
+  <nav class="navbar">
+        <div class="logo">
+            <div class="logo-box">💳</div>
+            <span>SmartBudget</span>
+        </div>
+        <ul class="nav-links">
+            <li>
+            <button class="nav-btn"data-page="info.html" onclick="goToHome()">Home</button>
+            </li>
+            <li>
+            <button class="nav-btn"data-page="budget.html" onclick="goToBudget()">Budget</button>
+            </li>
+            <li>
+            <button class="nav-btn" data-page="recommendations.html"onclick="goToRecommendations()">Recommendations</button>
+            </li>
+            <li>
+            <button class="nav-btn"data-page="comparison.html"  onclick="goToComparison()">Comparison</button>
+            </li>
+            <li>
+            <button class="nav-btn" data-page="wishlist.html" onclick="goToWishlist()">
+                    Wishlist ❤️ <span id="wishlistCount">(0)</span>
+            </button>
+
+            </li>
+            <li>
+            <button class="nav-btn" data-page="about.html"  onclick="goToAbout()">About</button>
+            </li>
+        </ul>
+    </nav>
+    <!-- Top Section -->
+    <section class="hero">
+        <div class="logo">
+            <img src="wallet.png" alt="logo">
+        </div>
+        <h1>About SmartBudget</h1>
+        <p>
+            We believe shopping should be smart, not stressful. Our mission is to help everyone
+            find the perfect products that match their budget and needs.
+        </p>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="stat">
+            <h2>50K+</h2>
+            <p>Happy Users</p>
+        </div>
+        <div class="stat">
+            <h2>100K+</h2>
+            <p>Products Indexed</p>
+        </div>
+        <div class="stat">
+            <h2>$2M+</h2>
+            <p>Saved by Users</p>
+        </div>
+        <div class="stat">
+            <h2>4.9</h2>
+            <p>User Rating</p>
+        </div>
+    </section>
+
+    <!-- Story Section -->
+    <section class="story">
+        <h2>Our Story</h2>
+        <p>
+            SmartBudget was born from a simple frustration: spending hours comparing products across different
+            websites, only to end up confused and overwhelmed by endless options.
+        </p>
+        <p>
+            We built this platform to solve that problem. By combining smart algorithms with a user-first approach,
+            we help you find the best products within your budget in seconds, not hours.
+        </p>
+        <p>
+            Today, we're proud to serve thousands of savvy shoppers who trust us to help them make informed
+            purchasing decisions.
+        </p>
+    </section>
+
+    <!-- Values Section -->
+    <section class="values">
+        <h2>Our Values</h2>
+        <p class="subtitle">The principles that guide everything we do.</p>
+
+        <div class="value-cards">
+            <div class="card">
+                <div class="icon">🎯</div>
+                <h3>Precision</h3>
+                <p>Our algorithms find exactly what fits your budget and needs.</p>
+            </div>
+
+            <div class="card">
+                <div class="icon">🛡️</div>
+                <h3>Trust</h3>
+                <p>We only recommend products from verified and reputable sources.</p>
+            </div>
+
+            <div class="card">
+                <div class="icon">⚡</div>
+                <h3>Speed</h3>
+                <p>Get instant recommendations without endless searching.</p>
+            </div>
+
+            <div class="card">
+                <div class="icon">📈</div>
+                <h3>Savings</h3>
+                <p>Help you make smarter purchases and save money.</p>
+            </div>
+        </div>
+    </section>
+<script>
+   function goToHome(){
+    window.location.href = "info.html";
+}
+function goToBudget(){
+    window.location.href = "budget.html";
+}
+function goToRecommendations(){
+    window.location.href = "recommendations.html";
+}
+function goToComparison(){
+    window.location.href = "comparison.html";
+}
+function goToWishlist(){
+    window.location.href = "wishlist.html";
+}
+function goToAbout(){
+    window.location.href = "about.html";
+}
+  
+  function go(page){
+    window.location.href = page;
+}
+
+// highlight current page
+const currentURL = window.location.href;
+
+document.querySelectorAll(".nav-btn").forEach(btn => {
+    const page = btn.dataset.page;
+    if(currentURL.includes(page)){
+        btn.classList.add("active");
+    }
+});
+
+
+</script>
+</body>
+</html>

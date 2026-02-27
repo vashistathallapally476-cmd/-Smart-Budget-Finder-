@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SmartBuy</title>
+
+<style>
+/* ================= RESET ================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ================= ROOT ================= */
+:root {
+  --bg: #050505;
+  --fg: #ffffff;
+  --muted: #a1a1aa;
+  --glow: rgba(255,255,255,0.25);
+}
+
+/* ================= BODY ================= */
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  overflow: hidden;
+}
+
+/* ================= CONTAINER ================= */
+.intro {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  place-items: center;
+  isolation: isolate;
+}
+
+/* ================= CANVAS BACKGROUND ================= */
+#bgCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+/* ================= GLOW ================= */
+.glow {
+  position: absolute;
+  inset: -40%;
+  background: radial-gradient(circle, rgba(255,255,255,0.08), transparent 60%);
+  z-index: 1;
+  animation: pulse 6s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,100% { opacity: .3; }
+  50% { opacity: .6; }
+}
+
+/* ================= SVG BACKGROUND ================= */
+.bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.35;
+  z-index: 2;
+}
+
+.bg path {
+  fill: none;
+  stroke: white;
+  animation: flow linear infinite;
+}
+
+@keyframes flow {
+  from { stroke-dashoffset: 1200; }
+  to   { stroke-dashoffset: -1200; }
+}
+
+/* ================= CONTENT ================= */
+.content {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  max-width: 1200px;
+  padding: 0 24px;
+  transform: translateY(20px);
+  opacity: 0;
+  animation: contentIn 1.2s ease forwards;
+  animation-delay: 1.2s;
+}
+
+@keyframes contentIn {
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ================= TITLE ================= */
+h1 span {
+      display: inline-block;
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      background: linear-gradient(to right, #ffffff, #a1a1aa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      transform: translateY(120px);
+      opacity: 0;
+      animation: rise 0.8s ease forwards;
+    }
+
+    @keyframes rise {
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+/* Delay for each letter */
+.logo span:nth-child(1) { animation-delay: 0s; }
+.logo span:nth-child(2) { animation-delay: 0.06s; }
+.logo span:nth-child(3) { animation-delay: 0.12s; }
+.logo span:nth-child(4) { animation-delay: 0.18s; }
+.logo span:nth-child(5) { animation-delay: 0.24s; }
+.logo span:nth-child(6) { animation-delay: 0.30s; }
+.logo span:nth-child(7) { animation-delay: 0.36s; }
+.logo span:nth-child(8) { animation-delay: 0.42s; }
+
+@keyframes rise {
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ================= SUBTITLE ================= */
+.subtitle {
+  margin-top: 18px;
+  font-size: 1.15rem;
+  color: var(--muted);
+  opacity: 0;
+  animation: fadeUp 1s ease forwards;
+  animation-delay: 2.3s;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(-6px);
+  }
+}
+
+/* ================= BUTTON ================= */
+.enter {
+  margin-top: 50px;
+  padding: 18px 56px;
+  font-size: 1.15rem;
+  font-weight: 600;
+  border-radius: 999px;
+  color: white;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.2);
+  backdrop-filter: blur(14px);
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: btnIn 0.9s ease forwards;
+  animation-delay: 2.9s;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 0 transparent;
+}
+
+@keyframes btnIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.enter:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 40px var(--glow);
+  background: rgba(255,255,255,0.15);
+}
+
+
+
+/* ================= MAGIC MOTION ================= */
+
+/* Pulse glow (idle attraction) */
+.enter {
+  position: relative;
+  overflow: hidden;
+  animation:
+    btnIn 0.9s ease forwards,
+    pulseGlow 3.2s ease-in-out infinite;
+}
+
+/* Outer glow pulse */
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(255,255,255,0.15);
+  }
+  50% {
+    box-shadow:
+      0 0 35px var(--glow),
+      0 0 60px rgba(255,255,255,0.25);
+  }
+}
+
+/* Orbiting energy ring */
+.enter::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 999px;
+  background:
+    conic-gradient(
+      from 0deg,
+      transparent,
+      var(--glow),
+      transparent 60%
+    );
+  animation: orbit 3s linear infinite;
+  opacity: 0.6;
+}
+
+@keyframes orbit {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Shimmer sweep on hover */
+.enter::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    transparent 30%,
+    rgba(255,255,255,0.35),
+    transparent 70%
+  );
+  transform: translateX(-120%);
+  transition: transform 0.6s ease;
+}
+
+.enter:hover::after {
+  transform: translateX(120%);
+}
+
+/* Hover lift enhancement */
+.enter:hover {
+  transform: translateY(-6px) scale(1.03);
+}
+
+/* Click press feedback */
+.enter:active {
+  transform: translateY(-2px) scale(0.97);
+  box-shadow: 0 0 20px var(--glow);
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="intro">
+
+  <!-- CANVAS PARTICLE BACKGROUND -->
+  <canvas id="bgCanvas"></canvas>
+
+  <div class="glow"></div>
+
+  <!-- SVG FLOW PATHS -->
+  <svg class="bg" viewBox="0 0 696 316">
+    <g id="paths"></g>
+  </svg>
+
+  <!-- CONTENT -->
+  <div class="content">
+    <h1 id="title">SmartBuy</h1>
+    <div class="subtitle">Buy smarter. Live better.</div>
+    <button class="enter" onclick="enterApp()">Enter →</button>
+  </div>
+
+</div>
+
+<script>
+/* ========== CANVAS BACKGROUND (ADVANCED SMOKE) ========== */
+const canvas = document.getElementById("bgCanvas");
+const ctx = canvas.getContext("2d");
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
+
+/* Mouse */
+const mouse = { x: innerWidth / 2, y: innerHeight / 2 };
+window.addEventListener("mousemove", e => {
+  mouse.x = e.clientX;
+  mouse.y = e.clientY;
+});
+
+/* Smoke Layers */
+const BACK_COUNT = 140;
+const FRONT_COUNT = 100;
+const backSmoke = [];
+const frontSmoke = [];
+
+function createSmoke(front = false) {
+  return {
+    x: Math.random() * canvas.width,
+    y: canvas.height + Math.random() * 300,
+    r: Math.random() * (front ? 28 : 18) + 8,
+    vx: (Math.random() - 0.5) * (front ? 0.6 : 0.25),
+    vy: Math.random() * (front ? 1.1 : 0.6) + 0.3,
+    a: Math.random() * (front ? 0.25 : 0.15) + 0.1,
+    life: Math.random() * 400 + 200
+  };
+}
+
+for (let i = 0; i < BACK_COUNT; i++) backSmoke.push(createSmoke(false));
+for (let i = 0; i < FRONT_COUNT; i++) frontSmoke.push(createSmoke(true));
+
+function drawSmokeLayer(arr, glow) {
+  arr.forEach(p => {
+    ctx.save();
+    ctx.globalAlpha = p.a;
+    ctx.fillStyle = "rgba(180,240,255,1)";
+    ctx.shadowColor = glow;
+    ctx.shadowBlur = 40;
+
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+
+    /* Movement */
+    const dx = (mouse.x - p.x) * 0.00004;
+    p.x += p.vx + dx + Math.sin(p.y * 0.01) * 0.4;
+    p.y -= p.vy;
+    p.a -= 0.0007;
+    p.r += 0.02;
+    p.life--;
+
+    if (p.a <= 0 || p.y < -200 || p.life <= 0) {
+      Object.assign(p, createSmoke(glow === "cyan"));
+    }
+  });
+}
+
+function animateSmoke() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  drawSmokeLayer(backSmoke, "rgba(150,220,255,0.4)");
+  drawSmokeLayer(frontSmoke, "rgba(200,255,255,0.9)");
+
+  requestAnimationFrame(animateSmoke);
+}
+animateSmoke();
+
+/* ========== TEXT SPLIT (UNCHANGED) ========== */
+const title = document.getElementById("title");
+const text = title.innerText;
+title.innerHTML = "";
+
+[...text].forEach((char, i) => {
+  const span = document.createElement("span");
+  span.textContent = char === " " ? "\u00A0" : char;
+  span.style.animationDelay = `${i * 0.08}s`;
+  title.appendChild(span);
+});
+
+/* ========== SVG PATHS (UNCHANGED) ========== */
+const group = document.getElementById("paths");
+
+for (let i = 0; i < 42; i++) {
+  const p = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  const o = i * 6;
+
+  p.setAttribute("d", `
+    M-${380 - o} -${189 + o}
+    C-${312 - o} ${216 - o}
+    ${152 - o} ${343 - o}
+    ${684 - o} ${875 - o}
+  `);
+
+  p.style.strokeWidth = 0.5 + i * 0.035;
+  p.style.opacity = 0.05 + i * 0.02;
+  p.style.strokeDasharray = "1200";
+  p.style.strokeDashoffset = "1200";
+  p.style.animationDuration = `${20 + i * 0.35}s`;
+
+  group.appendChild(p);
+}
+
+/* ========== ENTER ACTION ========== */
+function enterApp() {
+  window.location.href = "info.html";
+}
+</script>
+
+
+</body>
+</html>
