@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>SmartBudget</title>
+    <link rel="stylesheet" href="style.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <div class="logo-box">💳</div>
+            <span>SmartBudget</span>
+        </div>
+        <ul class="nav-links">
+            <li>
+            <button class="nav-btn"data-page="index.html" onclick="goToHome()">Home</button>
+            </li>
+            <li>
+            <button class="nav-btn"data-page="budget.html" onclick="goToBudget()">Budget</button>
+            </li>
+            <li>
+            <button class="nav-btn" data-page="recommendations.html"onclick="goToRecommendations()">Recommendations</button>
+            </li>
+            <li>
+            <button class="nav-btn"data-page="comparison.html"  onclick="goToComparison()">Comparison</button>
+            </li>
+            <li>
+             <button class="nav-btn" data-page="wishlist.html" onclick="goToWishlist()">
+                    Wishlist ❤️ <span id="wishlistCount">(0)</span>
+            </button>
+            </li>
+            <li>
+            <button class="nav-btn" data-page="about.html"  onclick="goToAbout()">About</button>
+            </li>
+        </ul>
+    </nav>
+    <section class="hero">
+        <div class="tag">✨ Smart Shopping Made Simple</div>
+
+        <h1>
+            Find Perfect Products <br>
+            <span>Within Your Budget</span>
+        </h1>
+
+        <p>
+            Stop endless scrolling. Tell us your budget, and we'll recommend the best
+            products that match your needs and wallet.
+        </p>
+
+               <div class="hero-buttons">
+          <button class="btn-primary" onclick="goToBudget()">Get Started →</button>
+          <button class="btn-outline" onclick="goToAbout()">Learn More</button>
+               </div>
+    </section>
+
+    <section class="how">
+        <h2>How It Works</h2>
+        <p class="sub">
+            Our smart system helps you make better purchasing decisions without overspending.
+        </p>
+
+        <div class="cards">
+            <div class="card">
+                <div class="icon">💼</div>
+                <h3>Set Your Budget</h3>
+                <p>Define your spending limits and let us find the best options within your range.</p>
+            </div>
+
+            <div class="card">
+                <div class="icon">🎯</div>
+                <h3>Smart Recommendations</h3>
+                <p>Get personalized product suggestions based on your budget and preferences.</p>
+            </div>
+
+            <div class="card">
+                <div class="icon">✨</div>
+                <h3>Compare & Choose</h3>
+                <p>Side-by-side comparisons help you make informed decisions quickly.</p>
+            </div>
+
+            <div class="card">
+                <div class="icon">📈</div>
+                <h3>Save Wisely</h3>
+                <p>Track your wishlist and get notified when prices drop.</p>
+            </div>
+        </div>
+    </section>
+    <section class="cta">
+        <h2>Ready to Shop Smarter?</h2>
+        <p>
+            Join thousands of savvy shoppers who save time and money with our
+            budget-based recommendations.
+        </p>
+        <button class="btn-primary" onclick="goToBudget()">Enter Your Budget →</button>
+    </section>
+    <script>
+ function goToHome(){
+    window.location.href = "index.html";
+}
+function goToBudget(){
+    window.location.href = "budget.html";
+}
+function goToRecommendations(){
+    window.location.href = "recommendations.html";
+}
+function goToComparison(){
+    window.location.href = "comparison.html";
+}
+function goToWishlist(){
+    window.location.href = "wishlist.html";
+}
+function goToAbout(){
+    window.location.href = "about.html";
+}
+  function go(page){
+    window.location.href = page;
+}
+
+// highlight current page
+const currentURL = window.location.href;
+
+document.querySelectorAll(".nav-btn").forEach(btn => {
+    const page = btn.dataset.page;
+    if(currentURL.includes(page)){
+        btn.classList.add("active");
+    }
+});
+
+
+</script>
+
+
+</body>
+</html>
