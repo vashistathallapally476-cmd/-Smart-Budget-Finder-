@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Wishlist - SmartBudget</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
 *{
     margin:0;
@@ -268,7 +268,27 @@ body{
 .browse-btn:active{
     transform: scale(0.96);
 }
+/* your existing css */
 
+/* ================= MOBILE RESPONSIVE ================= */
+
+@media (max-width:768px){
+    .navbar{
+        flex-direction:column;
+        gap:15px;
+        padding:20px;
+    }
+
+    .nav-links{
+        flex-wrap:wrap;
+        justify-content:center;
+        gap:10px;
+    }
+
+    .hero h1{
+        font-size:32px;
+    }
+}
 </style>
 </head>
 
@@ -433,3 +453,4 @@ document.addEventListener("DOMContentLoaded", function(){
 
 </body>
 </html>
+
